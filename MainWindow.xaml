@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="350" Width="300"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="Gray">
+    <Grid Background="#FF232437" Margin="0,0,0,-6">
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Top" Margin="0,76,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                <fa:ImageAwesome Icon="User" Width="20" Height="20" Margin="0 0 5 0" Foreground="DarkCyan"/>
+                <TextBox Name="txtUsername" TextWrapping="Wrap" Text="Username" Width="160" GotFocus="TxtUsername_GotFocus"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <fa:ImageAwesome Icon="Lock" Width="20" Height="20" Margin="0 0 5 0" Foreground="DarkCyan"/>
+                <PasswordBox Name="txtPassword" Width="160" Password="Password" GotFocus="TxtPassword_GotFocus"/>
+            </StackPanel>
+        </StackPanel>
+        <Label Content="Login" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24" FontFamily="Arial Black" Foreground="White"/>
+        <StackPanel Margin="0,159,0,0">
+            <Button Name="showPasswordBtn" Content="Show Password" Margin="0 0 0 15" HorizontalAlignment="Center" Width="185" Height="30" Background="DimGray" FontWeight="Bold" Foreground="DeepSkyBlue" Click="ShowPasswordBtn_Click"/>
+            <Button Name="loginBtn" Content="Login" Margin="0 0 0 15" HorizontalAlignment="Center" Width="185" Height="30" Background="DeepSkyBlue" FontWeight="Bold" Click="LoginBtn_Click"/>
+            <Button Name="signUpBtn" Content="Sign Up" Margin="0 0 0 15" HorizontalAlignment="Center" Width="185" Height="30" Background="DimGray" Foreground="DeepSkyBlue" FontWeight="Bold" Click="SignUpBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
