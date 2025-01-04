@@ -1,53 +1,67 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace library_management
+namespace library_management.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    class MainWindowViewModel : INotifyPropertyChanged
     {
-        public MainWindow()
+        private string _username;
+        public string Username 
         {
-            InitializeComponent();
+            get => _username;
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Password { get; set; }
+
+        public ICommand UsernameGotFocusCommand { get; }
+        public ICommand PasswordGotFocusCommand { get; }
+        public ICommand LoginCommand { get; }
+        public ICommand RegisterCommand { get; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public MainWindowViewModel()
+        {
+            Username = "Username";
+            Password = "Password";
+            UsernameGotFocusCommand = new RelayCommand(UsernameGotFocus);
+            PasswordGotFocusCommand = new RelayCommand(PasswordGotFocus);
+            LoginCommand = new RelayCommand(Login);
+            RegisterCommand = new RelayCommand(Register);
         }
 
-        private void TxtUsername_GotFocus(object sender, RoutedEventArgs e)
+        public void UsernameGotFocus()
         {
-            if (txtUsername.Text.Equals("Username"))
-            {
-                txtUsername.Clear();
-            }
+            if (Username.Equals("Username"))
+                Username = String.Empty;
         }
         
-        private void TxtPassword_GotFocus(object sender, RoutedEventArgs e)
+        public void PasswordGotFocus()
         {
-            if (txtPassword.Password.Equals("Password"))
-            {
-                txtPassword.Clear();
-            }
+            if (Password.Equals("Password"))
+                Password = String.Empty;
         }
 
-        private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
+        public void Login()
         {
-            string password = txtPassword.Password;
-            MessageBox.Show($"The entered password is: {password}");
-        }
-
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {
-
             MySqlConnection connection = DBConnectionService.GetConnection();
 
             try
@@ -57,8 +71,8 @@ namespace library_management
 
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
 
-                dataAdapter.SelectCommand.Parameters.AddWithValue("@username", txtUsername.Text);
-                dataAdapter.SelectCommand.Parameters.AddWithValue("@password", txtPassword.Password);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@username", Username);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@password", Password);
 
                 DataSet ds = new DataSet();
                 dataAdapter.Fill(ds);
@@ -66,16 +80,16 @@ namespace library_management
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     //Hide();
-                    MessageBox.Show("Logged in successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information );
-                } 
+                    MessageBox.Show("Logged in successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
                 else
                 {
                     MessageBox.Show("Invalid username or password. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            } 
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occured: {ex.Message}");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -83,14 +97,14 @@ namespace library_management
             }
         }
 
-        private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        public void Register()
         {
-            if (CheckRowExistence( "Users", ("username", txtUsername.Text)))
+            if (CheckRowExistence("Users", ("username", Username)))
             {
                 MessageBox.Show(
-                    "The username is already in use. Please try a different one.", 
-                    "Error", 
-                    MessageBoxButton.OK, 
+                    "The username is already in use. Please try a different one.",
+                    "Error",
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );
                 return;
@@ -103,8 +117,8 @@ namespace library_management
                 string query = "INSERT INTO Users (username, password) VALUES (@username, @password)";
                 MySqlCommand command = new(query, connection);
 
-                command.Parameters.AddWithValue("@username", txtUsername.Text);
-                command.Parameters.AddWithValue("@password", txtPassword.Password);
+                command.Parameters.AddWithValue("@username", Username);
+                command.Parameters.AddWithValue("@password", Password);
 
                 int rowsAffected = command.ExecuteNonQuery();
 
@@ -116,8 +130,8 @@ namespace library_management
                 {
                     MessageBox.Show("Registration failed. Please try again later.");
                 }
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine($"An error occured: {ex.Message}");
             }
@@ -137,10 +151,10 @@ namespace library_management
                 int n = pairs.Length;
                 for (int i = 0; i < n; i++)
                 {
-                    query += 
-                        i == n - 1 
+                    query +=
+                        i == n - 1
                         ?
-                        $"{pairs[i].columnName} = '{pairs[i].columnValue}'" 
+                        $"{pairs[i].columnName} = '{pairs[i].columnValue}'"
                         :
                         $"{pairs[i].columnName} = '{pairs[i].columnValue}' and ";
                 }
@@ -153,7 +167,7 @@ namespace library_management
 
                 return ds.Tables[0].Rows.Count > 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return false;
