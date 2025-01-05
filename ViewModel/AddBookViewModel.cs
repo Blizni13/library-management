@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace library_management.ViewModel
                         ("title", Title),
                         ("author", Author),
                         ("publication", Publication),
-                        ("price", Price.ToString()),
+                        ("price", Price.ToString(CultureInfo.InvariantCulture)),
                         ("quantity", Quantity.ToString())
                     ]
                 ))
@@ -74,6 +75,7 @@ namespace library_management.ViewModel
                 if (rowsAffected > 0)
                 {
                     MessageBoxService.ShowSuccessBox("Book added successfully");
+                    Title = "";
                 }
                 else
                 {
