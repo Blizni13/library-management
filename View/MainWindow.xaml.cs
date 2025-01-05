@@ -22,7 +22,6 @@ namespace library_management.View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
         }
 
         private void TxtUsername_GotFocus(object sender, RoutedEventArgs e)
