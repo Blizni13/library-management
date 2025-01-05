@@ -26,7 +26,7 @@
                 <MenuItem.Icon>
                     <fa:ImageAwesome Icon="Book" />
                 </MenuItem.Icon>
-                <MenuItem Header="Add New Book" FontWeight="Normal" FontSize="15">
+                <MenuItem Header="Add New Book" FontWeight="Normal" FontSize="15" Command="{Binding OpenAddBookCommand}">
                     <MenuItem.Icon>
                         <fa:ImageAwesome Icon="PlusCircle"/>
                     </MenuItem.Icon>
