@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using library_management.View;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,8 +80,15 @@ namespace library_management.ViewModel
 
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                    //Hide();
                     MessageBox.Show("Logged in successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // open the next window
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.Show();
+
+                    // close the login-register window
+                    Application.Current.Windows[0]?.Close();
+
                 }
                 else
                 {
