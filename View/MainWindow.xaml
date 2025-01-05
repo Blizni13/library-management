@@ -10,11 +10,9 @@
         Title="MainWindow" Height="350" Width="300"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Background="Gray">
-
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
-    
     <Grid Background="#FF232437" Margin="0,0,0,-6">
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Top" Margin="0,76,0,0">
             <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
