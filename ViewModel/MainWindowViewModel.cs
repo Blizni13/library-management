@@ -1,4 +1,5 @@
-﻿using library_management.View;
+﻿using library_management.Services;
+using library_management.View;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -107,7 +108,7 @@ namespace library_management.ViewModel
 
         public void Register()
         {
-            if (CheckRowExistence("Users", ("username", Username)))
+            if (DBOperationService.CheckRowExistence("Users", ("username", Username)))
             {
                 MessageBox.Show(
                     "The username is already in use. Please try a different one.",
@@ -142,43 +143,6 @@ namespace library_management.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occured: {ex.Message}");
-            }
-            finally
-            {
-                DBConnectionService.CloseConnection();
-            }
-        }
-
-        private bool CheckRowExistence(string tableName, params (string columnName, string columnValue)[] pairs)
-        {
-            var connection = DBConnectionService.GetConnection();
-
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE ";
-                int n = pairs.Length;
-                for (int i = 0; i < n; i++)
-                {
-                    query +=
-                        i == n - 1
-                        ?
-                        $"{pairs[i].columnName} = '{pairs[i].columnValue}'"
-                        :
-                        $"{pairs[i].columnName} = '{pairs[i].columnValue}' and ";
-                }
-
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-
-                return ds.Tables[0].Rows.Count > 0;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
             }
             finally
             {
