@@ -1,0 +1,81 @@
+﻿<Window x:Class="library_management.View.AddBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:library_management.View" 
+        xmlns:viewModel="clr-namespace:library_management.ViewModel"
+        mc:Ignorable="d"
+        Title="AddBook" Height="450" Width="684"
+        Background="#FFFFEFCC" 
+        Icon="/Resources/add_book_img.jpg">
+    <Grid>
+        <!-- Define outer grid rows and cols -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Upper page structure -->
+
+        <TextBlock Grid.Row="0"
+                 Grid.ColumnSpan="2"
+                 VerticalAlignment="Stretch" 
+                 HorizontalAlignment="Stretch" 
+                 TextAlignment="Center" 
+                 Background="LightYellow" 
+                 FontWeight="Bold" 
+                 FontSize="16"
+                 Padding="0 10 0 10">Add Book</TextBlock>
+
+        <!-- Bottom page structure -->
+
+        <Grid Grid.Row="1" Grid.Column="0" Width="250">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Book Title" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="13"/>
+            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Title}"/>
+
+            <Label Content="Book Author" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Author}"/>
+
+            <Label Content="Book Publication" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Publication}"/>
+
+            <Label Content="Book Price" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Price}"/>
+
+            <Label Content="Book Quantity" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Quantity}"/>
+
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Button Content="Add" Command="{Binding AddCommand}" Width="50" Margin="0 0 20 0" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Width="50" VerticalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+        </Grid>
+
+        <Image Grid.Row="1" 
+               Grid.Column="1"
+               Source="../Resources/add_book_img.jpg" 
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"/>
+
+    </Grid>
+</Window>
