@@ -38,7 +38,7 @@ namespace library_management.Services
             }
             catch (Exception ex)
             {
-                MessageBoxService.ShowErrorBox($"An error occured: ${ex.Message}");
+                MessageBoxService.ShowErrorBox($"An error occured: {ex.Message}");
                 return false;
             }
             finally
