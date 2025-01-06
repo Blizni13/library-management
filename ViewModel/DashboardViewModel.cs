@@ -16,16 +16,22 @@ namespace library_management.ViewModel
     {
         // windows
         private AddBook? _addBookWindow;
+        private ViewBooks? _viewBooksWindow;
+        private AddReader? _addReaderWindow;
 
         // commands
         public ICommand ExitCommand { get; }
         public ICommand OpenAddBookCommand { get; }
+        public ICommand OpenViewBooksCommand { get; }
+        public ICommand OpenAddReaderCommand { get; }
 
         public DashboardViewModel()
         {
             _addBookWindow = null;
             ExitCommand = new RelayCommand(Exit);
             OpenAddBookCommand = new RelayCommand(OpenAddBook);
+            OpenViewBooksCommand = new RelayCommand(OpenViewBooks);
+            OpenAddReaderCommand = new RelayCommand(OpenAddReader);
         }
 
         public void Exit()
@@ -53,9 +59,45 @@ namespace library_management.ViewModel
             }
         }
 
+        public void OpenViewBooks()
+        {
+            if (!WindowService.IsWindowOpen<ViewBooks>())
+            {
+                _viewBooksWindow = new ViewBooks();
+                _viewBooksWindow.Show();
+            }
+            else
+            {
+                _viewBooksWindow?.Activate();
+            }
+        }
+
+        public void OpenAddReader()
+        {
+            if (_addReaderWindow == null)
+            {
+                _addReaderWindow = new AddReader()
+                {
+                    DataContext = new AddReaderViewModel(this)
+                };
+                _addReaderWindow.Show();
+            }
+            else
+            {
+                _addReaderWindow.Activate();
+            }
+        }
+
         public void CloseAddBook()
         {
             _addBookWindow?.Close();
+            _addBookWindow = null;
+        }
+
+        public void CloseAddReader()
+        {
+            _addReaderWindow?.Close();
+            _addReaderWindow = null;
         }
     }
 }
