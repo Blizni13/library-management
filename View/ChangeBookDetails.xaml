@@ -1,0 +1,68 @@
+﻿<Window x:Class="library_management.View.ChangeBookDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:library_management.View" 
+        xmlns:viewModel="clr-namespace:library_management.ViewModel"
+        mc:Ignorable="d"
+        Title="Change" Height="330" Width="352">
+    <Window.DataContext>
+        <viewModel:ChangeBookDetailsViewModel/>
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Update Book Details" 
+               FontSize="16" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               Margin="0,0,0,10" 
+               Grid.Row="0"/>
+
+        <Grid Grid.Row="1" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Book Title -->
+            <Label Content="Book Title:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="TitleTextBox" Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Title, Mode=TwoWay}"/>
+
+            <!-- Book Author -->
+            <Label Content="Book Author:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="AuthorTextBox" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Author, Mode=TwoWay}"/>
+
+            <!-- Book Publication -->
+            <Label Content="Publication:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="PublicationTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Publication, Mode=TwoWay}"/>
+
+            <!-- Book Price -->
+            <Label Content="Price:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Price, Mode=TwoWay}"/>
+
+            <!-- Book Quantity -->
+            <Label Content="Quantity:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="QuantityTextBox" Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Quantity, Mode=TwoWay}"/>
+        </Grid>
+
+        <!-- Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Margin="0,10">
+            <Button Content="Update" Width="75" Margin="5" Command="{Binding UpdateCommand}"/>
+            <Button Content="Delete" Width="75" Margin="5" Command="{Binding DeleteCommand}"/>
+            <Button Content="Cancel" Name="CancelButton" Width="75" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
