@@ -75,7 +75,6 @@ namespace library_management.ViewModel
                 if (rowsAffected > 0)
                 {
                     MessageBoxService.ShowSuccessBox("Book added successfully");
-                    Title = "";
                 }
                 else
                 {
