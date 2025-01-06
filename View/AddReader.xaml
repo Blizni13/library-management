@@ -1,0 +1,88 @@
+﻿<Window x:Class="library_management.View.AddReader"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:library_management.View" 
+        xmlns:viewModel="clr-namespace:library_management.ViewModel" d:DataContext="{d:DesignInstance Type=viewModel:AddReaderViewModel}"
+        mc:Ignorable="d"
+        Title="AddReader" Height="450" Width="800" WindowStyle="None"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
+        <!-- Define outer grid rows and cols -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Upper page structure -->
+
+        <TextBlock Text="Add Reader" Grid.Row="0"
+             Grid.ColumnSpan="2"
+             VerticalAlignment="Stretch" 
+             HorizontalAlignment="Stretch" 
+             TextAlignment="Center" 
+             Background="LightYellow" 
+             FontWeight="Bold" 
+             FontSize="16"
+             Padding="0 10 0 10"/>
+
+        <!-- Bottom page structure -->
+
+        <Grid Grid.Row="1" Grid.Column="0" Width="325">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="First Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="13"/>
+            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Content="Last Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Content="Date Of Birth" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <DatePicker Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Content="Gender" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" SelectedItem="{Binding Gender, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Content="Male" />
+                <ComboBoxItem Content="Female" />
+                <ComboBoxItem Content="Other" />
+            </ComboBox>
+
+            <Label Content="Address" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <Label Content="Membership Start Date" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
+            <DatePicker Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" SelectedDate="{Binding MembershipStartDate, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Button Content="Add" Command="{Binding AddCommand}" Width="50" Margin="0 0 20 0" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Width="50" VerticalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+        </Grid>
+
+        <Image Grid.Row="1" 
+           Grid.Column="1"
+           Source="../Resources/add_reader_img.jpg" 
+           HorizontalAlignment="Stretch" 
+           VerticalAlignment="Stretch"/>
+
+    </Grid>
+</Window>
