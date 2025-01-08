@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:library_management.View" 
         xmlns:viewModel="clr-namespace:library_management.ViewModel"
         mc:Ignorable="d"
-        Title="Change" Height="330" Width="352"
+        Title="Change" Height="375" Width="350"
         Icon="/Resources/small_book_img.jpg">
     <Window.DataContext>
         <viewModel:ChangeBookDetailsViewModel/>
