@@ -10,12 +10,11 @@
         Icon="/Resources/small_book_img.jpg" 
         Background="LightGray" WindowStyle="ToolWindow">
     <Window.Resources>
-        <Style x:Key="DataGridStyle" TargetType="DataGrid">
-            <Setter Property="CanUserResizeColumns" Value="False"/>
-            <Setter Property="CanUserResizeRows" Value="False"/>
-            <Setter Property="MaxWidth" Value="370"/>
-            <Setter Property="MaxHeight" Value="225"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/ViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
@@ -25,17 +24,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" 
-               Content="View Books"
-               VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Center"
-               FontSize="18"
-               FontWeight="Bold"
-               Background="#FF898989"
-               Foreground="White"/>
+        <Label Grid.Row="0" Content="View Books" Style="{StaticResource TitleLabelStyle}"/>
 
         <Rectangle Grid.Row="1"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Style="{StaticResource SearchStackPanelStyle}">
             <Label VerticalAlignment="Center">Search by book name</Label>
             <TextBox Name="BookTextBox" VerticalAlignment="Center" Width="150" Margin="10 0 10 0" TextChanged="TextBox_TextChanged"/>
             <Button VerticalAlignment="Center" Width="75" Click="Button_Click">Refresh</Button>
