@@ -18,12 +18,14 @@ namespace library_management.ViewModel
         private AddBook? _addBookWindow;
         private ViewBooks? _viewBooksWindow;
         private AddReader? _addReaderWindow;
+        private ViewReaders? _viewReadersWindow;
 
         // commands
         public ICommand ExitCommand { get; }
         public ICommand OpenAddBookCommand { get; }
         public ICommand OpenViewBooksCommand { get; }
         public ICommand OpenAddReaderCommand { get; }
+        public ICommand OpenViewReadersCommand { get; }
 
         public DashboardViewModel()
         {
@@ -32,6 +34,7 @@ namespace library_management.ViewModel
             OpenAddBookCommand = new RelayCommand(OpenAddBook);
             OpenViewBooksCommand = new RelayCommand(OpenViewBooks);
             OpenAddReaderCommand = new RelayCommand(OpenAddReader);
+            OpenViewReadersCommand = new RelayCommand(OpenViewReaders);
         }
 
         public void Exit()
@@ -85,6 +88,19 @@ namespace library_management.ViewModel
             else
             {
                 _addReaderWindow.Activate();
+            }
+        }
+
+        public void OpenViewReaders()
+        {
+            if (!WindowService.IsWindowOpen<ViewReaders>())
+            {
+                _viewReadersWindow = new ViewReaders();
+                _viewReadersWindow.Show();
+            }
+            else
+            {
+                _viewReadersWindow?.Activate();
             }
         }
 
