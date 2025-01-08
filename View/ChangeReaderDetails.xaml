@@ -1,0 +1,82 @@
+﻿<Window x:Class="library_management.View.ChangeReaderDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:library_management.View" 
+        xmlns:viewModel="clr-namespace:library_management.ViewModel"
+        mc:Ignorable="d"
+        Title="ChangeReaderDetails" Height="375" Width="350">
+
+    <Window.DataContext>
+        <viewModel:ChangeReaderDetailsViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/ChangeDetailsStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Update Reader Details" Grid.Row="0" Style="{StaticResource TitleLabelStyle}"/>
+
+        <Grid Grid.Row="1" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- First Name -->
+            <Label Content="First Name:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="FirstNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding FirstName, Mode=TwoWay}"/>
+
+            <!-- Last Name -->
+            <Label Content="Last Name:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="LastNameTextBox" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding LastName, Mode=TwoWay}"/>
+
+            <!-- Date Of Birth -->
+            <Label Content="Date Of Birth:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <DatePicker x:Name="DateOfBirth" Grid.Row="2" Grid.Column="1" Margin="5" SelectedDate="{Binding DateOfBirth, Mode=TwoWay}"/>
+
+            <!-- Gender -->
+            <Label Content="Gender:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox x:Name="GenderComboBox" Grid.Row="3" Grid.Column="1" Margin="5" SelectedItem="{Binding Gender, Mode=TwoWay}">
+                <ComboBoxItem Content="Male" />
+                <ComboBoxItem Content="Female" />
+                <ComboBoxItem Content="Other" />
+            </ComboBox>
+
+            <!-- Address -->
+            <Label Content="Address:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox x:Name="AddressTextBox" Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Address, Mode=TwoWay}"/>
+
+            <!-- Membership Start Date -->
+            <Label Content="Membership Start Date:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <DatePicker x:Name="MembershipStartDateTextBox" Grid.Row="5" Grid.Column="1" Margin="5" SelectedDate="{Binding MembershipStartDate, Mode=TwoWay}"/>
+        </Grid>
+
+        <!-- Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Margin="0,10">
+            <Button Content="Update" Width="75" Margin="5" Command="{Binding UpdateCommand}"/>
+            <Button Content="Delete" Width="75" Margin="5" Command="{Binding DeleteCommand}"/>
+            <Button Content="Cancel" Name="CancelButton" Width="75" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
