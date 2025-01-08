@@ -81,12 +81,15 @@ namespace library_management.View
             {
                 ChangeBookDetails changeBookDetailsWindow = new ChangeBookDetails(
                     selectedBook.ID,
-                    selectedBook.Title, 
-                    selectedBook.Author, 
-                    selectedBook.Publication, 
-                    selectedBook.Price, 
-                    selectedBook.Quantity);
-                changeBookDetailsWindow.Show();
+                    selectedBook.Title,
+                    selectedBook.Author,
+                    selectedBook.Publication,
+                    selectedBook.Price,
+                    selectedBook.Quantity)
+                {
+                    Owner = this
+                };
+                changeBookDetailsWindow.ShowDialog();
             }
         }
 
