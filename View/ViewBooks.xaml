@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:library_management.View"
         mc:Ignorable="d"
         Title="ViewBooks" Height="450" Width="800"
-        Loaded="Window_Loaded" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        Loaded="Window_Loaded" 
+        Icon="/Resources/small_book_img.jpg" 
+        Background="LightGray" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <Style x:Key="DataGridStyle" TargetType="DataGrid">
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="MaxWidth" Value="370"/>
+            <Setter Property="MaxHeight" Value="225"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -20,15 +31,28 @@
                HorizontalContentAlignment="Center"
                FontSize="18"
                FontWeight="Bold"
-               Background="LightYellow"/>
+               Background="#FF898989"
+               Foreground="White"/>
 
-        <Rectangle Grid.Row="1" Fill="AliceBlue"/>
+        <Rectangle Grid.Row="1"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label VerticalAlignment="Center">Search by book name</Label>
             <TextBox Name="BookTextBox" VerticalAlignment="Center" Width="150" Margin="10 0 10 0" TextChanged="TextBox_TextChanged"/>
             <Button VerticalAlignment="Center" Width="75" Click="Button_Click">Refresh</Button>
         </StackPanel>
-        <DataGrid Name="BooksDataGrid" Grid.Row="2" SelectionChanged="BooksDataGrid_SelectionChanged" Margin="0,0,0,-201">
-        </DataGrid>
+
+        <Border Grid.Row="2" Background="#FF898989">
+            <DataGrid Name="BooksDataGrid" Style="{StaticResource DataGridStyle}" SelectionChanged="BooksDataGrid_SelectionChanged">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+        </Border>
     </Grid>
 </Window>

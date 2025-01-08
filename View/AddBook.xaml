@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:library_management.ViewModel"
         mc:Ignorable="d"
         Title="AddBook" Height="450" Width="684"
-        Background="#FFFFEFCC" 
+        Background="LightGray" 
         Icon="/Resources/add_book_img.jpg" WindowStyle="None"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
@@ -29,7 +29,8 @@
                  VerticalAlignment="Stretch" 
                  HorizontalAlignment="Stretch" 
                  TextAlignment="Center" 
-                 Background="LightYellow" 
+                 Background="#FF898989"
+                 Foreground="White"
                  FontWeight="Bold" 
                  FontSize="16"
                  Padding="0 10 0 10">Add Book</TextBlock>

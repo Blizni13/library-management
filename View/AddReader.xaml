@@ -7,7 +7,8 @@
         xmlns:viewModel="clr-namespace:library_management.ViewModel" d:DataContext="{d:DesignInstance Type=viewModel:AddReaderViewModel}"
         mc:Ignorable="d"
         Title="AddReader" Height="450" Width="800" WindowStyle="None"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Background="LightGray">
     <Grid>
         <!-- Define outer grid rows and cols -->
         <Grid.RowDefinitions>
@@ -27,7 +28,8 @@
              VerticalAlignment="Stretch" 
              HorizontalAlignment="Stretch" 
              TextAlignment="Center" 
-             Background="LightYellow" 
+             Background="#FF898989" 
+             Foreground="White"
              FontWeight="Bold" 
              FontSize="16"
              Padding="0 10 0 10"/>
