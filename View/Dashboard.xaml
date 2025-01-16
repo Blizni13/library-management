@@ -52,7 +52,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Issue Book" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Height="50" Margin="10,0,10,0">
+            <MenuItem Header="Issue Book" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Height="50" Margin="10,0,10,0" Command="{Binding OpenIssueBookCommand}">
                 <MenuItem.Icon>
                     <fa:ImageAwesome Icon="SignIn"/>
                 </MenuItem.Icon>
