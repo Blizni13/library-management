@@ -13,11 +13,13 @@
     <None Remove="Font Awesome 6 Free Solid.otf" />
     <None Remove="Resources\add_book_img.jpg" />
     <None Remove="Resources\add_reader_img.jpg" />
+    <None Remove="Resources\issue_book_img.jpg" />
     <None Remove="Resources\library_img.jpg" />
     <None Remove="Resources\small_book_img.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\issue_book_img.jpg" />
     <Resource Include="Resources\small_book_img.jpg" />
   </ItemGroup>
 
