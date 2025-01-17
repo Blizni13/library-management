@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:library_management.View"
+        xmlns:local="clr-namespace:library_management.View" 
         mc:Ignorable="d"
         Title="IssueBook" Height="450" Width="800" WindowStyle="ToolWindow"
         >
@@ -53,7 +53,7 @@
                 Grid.Column="0" 
                 VerticalAlignment="Center"/>
             <TextBox 
-                Text="{Binding ReaderId}" 
+                x:Name="ReaderIdTextBox"
                 Grid.Column="1"
                 VerticalAlignment="Center"/>
             
@@ -63,8 +63,8 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"/>
             <ComboBox 
-                ItemsSource="{Binding BookOptions}"
-                SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
+                x:Name="BooksComboBox"
+                ItemsSource="{Binding Books}"
                 Grid.Row="1"
                 Grid.Column="1"
                 VerticalAlignment="Center"/>
@@ -75,7 +75,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"/>
             <DatePicker
-                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                x:Name="BookIssueDatePicker"
                 Grid.Row="2" 
                 Grid.Column="1"
                 VerticalAlignment="Center"/>
@@ -85,7 +85,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Click="Button_Click"/>
         </Grid>
         
         <!-- Image panel -->

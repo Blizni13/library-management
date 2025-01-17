@@ -1,6 +1,13 @@
-﻿using System;
+﻿using library_management.DTO;
+using library_management.Model;
+using library_management.Services;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,9 +26,78 @@ namespace library_management.View
     /// </summary>
     public partial class IssueBook : Window
     {
+        public ObservableCollection<BookDTO> Books { get; set; } 
+
         public IssueBook()
         {
+            DataContext = this;
+            Books = new ObservableCollection<BookDTO>
+            {
+                new("OOP", "Einstein"),
+                new("Design Patterns", "Flower"),
+                new("Clean Code", "Martin")
+            };
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateInputFields())
+                return;
+            AddIssuedBookToDb();
+        }
+
+        private bool ValidateInputFields()
+        {
+            bool result = false;
+
+            if (String.IsNullOrEmpty(ReaderIdTextBox.Text))
+                MessageBoxService.ShowErrorBox("You have to provide reader id.");
+            else if (!DoesReaderExist(ReaderIdTextBox.Text))
+                MessageBoxService.ShowErrorBox("Select correct reader id. This reader does not exist.");
+            else if (BooksComboBox.SelectedItem == null)
+                MessageBoxService.ShowErrorBox("Select book that you want to issue.");
+            else if (IsBookIssued(BooksComboBox.SelectedItem.ToString()))
+                MessageBoxService.ShowErrorBox("Selected book is already issued.");
+            else if (BookIssueDatePicker.SelectedDate == null)
+                MessageBoxService.ShowErrorBox("Select date.");
+            else
+                result = true;
+
+            return result;
+        }
+
+        private bool DoesReaderExist(string readerId)
+        {
+            return DBOperationService.CheckRowExistence("Readers", ("ReaderId", readerId));
+        }
+
+        private bool IsBookIssued(string bookInfo)
+        {
+            return DBOperationService.CheckRowExistence("IssuedBooks", ("BookInfo", bookInfo));
+        }
+
+        private void AddIssuedBookToDb()
+        {
+            var connection = DBConnectionService.GetConnection();
+
+            string query = "INSERT INTO IssuedBooks (ReaderId, BookInfo, IssueDate) VALUES (@ReaderId, @BookInfo, @IssueDate)";
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ReaderId", ReaderIdTextBox.Text);
+            command.Parameters.AddWithValue("@BookInfo", BooksComboBox.SelectedItem);
+            command.Parameters.AddWithValue("@IssueDate", BookIssueDatePicker.SelectedDate);
+
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                MessageBoxService.ShowSuccessBox("Book successfully issued.");
+            }
+            else
+            {
+                MessageBoxService.ShowErrorBox("Book couldn't be successfully added, try again.");
+            }
         }
     }
 }
