@@ -3,6 +3,7 @@ using library_management.Model;
 using library_management.Services;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace library_management.View
 {
@@ -31,12 +33,7 @@ namespace library_management.View
         public IssueBook()
         {
             DataContext = this;
-            Books = new ObservableCollection<BookDTO>
-            {
-                new("OOP", "Einstein"),
-                new("Design Patterns", "Flower"),
-                new("Clean Code", "Martin")
-            };
+            LoadBooksFromDb();
             InitializeComponent();
         }
 
@@ -77,26 +74,70 @@ namespace library_management.View
             return DBOperationService.CheckRowExistence("IssuedBooks", ("BookInfo", bookInfo));
         }
 
+        private void LoadBooksFromDb()
+        {
+            var connection = DBConnectionService.GetConnection();
+
+            try
+            {
+                string query = "SELECT title, author FROM Books";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                Books = new ObservableCollection<BookDTO>();
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var title = reader.GetString(0);
+                        var author = reader.GetString(1);
+                        Books.Add(new BookDTO(title, author));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxService.ShowErrorBox($"An error occured: {ex.Message}");
+            }
+            finally
+            {
+                DBConnectionService.CloseConnection();
+            }
+
+        }
+
         private void AddIssuedBookToDb()
         {
             var connection = DBConnectionService.GetConnection();
 
-            string query = "INSERT INTO IssuedBooks (ReaderId, BookInfo, IssueDate) VALUES (@ReaderId, @BookInfo, @IssueDate)";
-
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@ReaderId", ReaderIdTextBox.Text);
-            command.Parameters.AddWithValue("@BookInfo", BooksComboBox.SelectedItem);
-            command.Parameters.AddWithValue("@IssueDate", BookIssueDatePicker.SelectedDate);
-
-            int rowsAffected = command.ExecuteNonQuery();
-
-            if (rowsAffected > 0)
+            try
             {
-                MessageBoxService.ShowSuccessBox("Book successfully issued.");
-            }
-            else
+                string query = "INSERT INTO IssuedBooks (ReaderId, BookInfo, IssueDate) VALUES (@ReaderId, @BookInfo, @IssueDate)";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ReaderId", ReaderIdTextBox.Text);
+                command.Parameters.AddWithValue("@BookInfo", BooksComboBox.SelectedItem);
+                command.Parameters.AddWithValue("@IssueDate", BookIssueDatePicker.SelectedDate);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    MessageBoxService.ShowSuccessBox("Book successfully issued.");
+                }
+                else
+                {
+                    MessageBoxService.ShowErrorBox("Book couldn't be successfully added, try again.");
+                }
+            } 
+            catch (Exception ex)
             {
-                MessageBoxService.ShowErrorBox("Book couldn't be successfully added, try again.");
+                MessageBoxService.ShowErrorBox($"An error occured {ex.Message}");
+            } 
+            finally
+            {
+                DBConnectionService.CloseConnection();
             }
         }
     }
