@@ -55,8 +55,7 @@ namespace library_management.View
                         var author = reader.GetString(2);
                         var publication = reader.GetString(3);
                         var price = reader.GetDecimal(4);
-                        var quantity = reader.GetInt32(5);
-                        books.Add(new Book(id, title, author, publication, price, quantity));
+                        books.Add(new Book(id, title, author, publication, price));
                     }
                 }
 
@@ -84,8 +83,7 @@ namespace library_management.View
                     selectedBook.Title,
                     selectedBook.Author,
                     selectedBook.Publication,
-                    selectedBook.Price,
-                    selectedBook.Quantity)
+                    selectedBook.Price)
                 {
                     Owner = this
                 };
