@@ -71,7 +71,7 @@ namespace library_management.View
 
         private bool IsBookIssued(string bookInfo)
         {
-            return DBOperationService.CheckRowExistence("IssuedBooks", ("BookInfo", bookInfo));
+            return DBOperationService.CheckRowExistence("IRBooks", ("BookInfo", bookInfo), ("ReturnDate", null));
         }
 
         private void LoadBooksFromDb()
@@ -113,7 +113,7 @@ namespace library_management.View
 
             try
             {
-                string query = "INSERT INTO IssuedBooks (ReaderId, BookInfo, IssueDate) VALUES (@ReaderId, @BookInfo, @IssueDate)";
+                string query = "INSERT INTO IRBooks (ReaderId, BookInfo, IssueDate) VALUES (@ReaderId, @BookInfo, @IssueDate)";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ReaderId", ReaderIdTextBox.Text);
