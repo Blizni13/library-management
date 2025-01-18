@@ -10,22 +10,26 @@ namespace library_management.Services
 {
     public class DBOperationService
     {
-        public static bool CheckRowExistence(string tableName, params (string columnName, string columnValue)[] pairs)
+        public static bool CheckRowExistence(string tableName, params (string columnName, string? columnValue)[] pairs)
         {
             var connection = DBConnectionService.GetConnection();
 
             try
             {
                 string query = $"SELECT * FROM {tableName} WHERE ";
+                string compareSign;
+                string parsedColumnValue;
                 int n = pairs.Length;
                 for (int i = 0; i < n; i++)
                 {
+                    compareSign = String.IsNullOrEmpty(pairs[i].columnValue) ? "IS" : "=";
+                    parsedColumnValue = String.IsNullOrEmpty(pairs[i].columnValue) ? "NULL" : $"'{pairs[i].columnValue}'";
                     query +=
                         i == n - 1
                         ?
-                        $"{pairs[i].columnName} = '{pairs[i].columnValue}'"
+                        $"{pairs[i].columnName} {compareSign} {parsedColumnValue}"
                         :
-                        $"{pairs[i].columnName} = '{pairs[i].columnValue}' and ";
+                        $"{pairs[i].columnName} {compareSign} {parsedColumnValue} and ";
                 }
 
                 MySqlCommand command = new MySqlCommand(query, connection);
