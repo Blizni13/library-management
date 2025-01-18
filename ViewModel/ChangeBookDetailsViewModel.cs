@@ -17,7 +17,6 @@ namespace library_management.ViewModel
         private string _author;
         private string _publication;
         private decimal _price;
-        private int _quantity;
 
         public int Id { get; set; }
         public string Title
@@ -59,16 +58,6 @@ namespace library_management.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public int Quantity
-        {
-            get => _quantity;
-            set
-            {
-                _quantity = value;
-                OnPropertyChanged();
-            }
-        }
         public ICommand UpdateCommand { get; }
         public ICommand DeleteCommand { get; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -92,15 +81,13 @@ namespace library_management.ViewModel
                                  SET title = @title, 
                                     author = @author, 
                                     publication = @publication, 
-                                    price = @price, 
-                                    quantity = @quantity 
+                                    price = @price
                                  WHERE id = @id";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@title", Title);
                 command.Parameters.AddWithValue("@author", Author);
                 command.Parameters.AddWithValue("@publication", Publication);
                 command.Parameters.AddWithValue("@price", Price);
-                command.Parameters.AddWithValue("@quantity", Quantity);
                 command.Parameters.AddWithValue("@id", Id);
 
                 int rowsAffected = command.ExecuteNonQuery();

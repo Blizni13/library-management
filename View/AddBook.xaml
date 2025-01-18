@@ -44,7 +44,6 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -63,9 +62,6 @@
 
             <Label Content="Book Price" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
             <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Price}"/>
-
-            <Label Content="Book Quantity" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" FontSize="13" />
-            <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Quantity}"/>
 
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Button Content="Add" Command="{Binding AddCommand}" Width="50" Margin="0 0 20 0" VerticalAlignment="Center" FontWeight="Bold"/>

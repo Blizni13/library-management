@@ -18,7 +18,6 @@ namespace library_management.ViewModel
         public string Author { get; set; }
         public string Publication { get; set; }
         public decimal Price { get; set; }
-        public int Quantity { get; set; }
 
         public ICommand AddCommand { get; }
         public ICommand CancelCommand { get; }
@@ -48,7 +47,6 @@ namespace library_management.ViewModel
                         ("author", Author),
                         ("publication", Publication),
                         ("price", Price.ToString(CultureInfo.InvariantCulture)),
-                        ("quantity", Quantity.ToString())
                     ]
                 ))
             {
@@ -62,14 +60,13 @@ namespace library_management.ViewModel
             try
             {
                 string query 
-                  = "INSERT INTO Books (title, author, publication, price, quantity) " +
-                    "VALUES (@title, @author, @publication, @price, @quantity)";
+                  = "INSERT INTO Books (title, author, publication, price) " +
+                    "VALUES (@title, @author, @publication, @price)";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@title", Title);
                 command.Parameters.AddWithValue("@author", Author);
                 command.Parameters.AddWithValue("@publication", Publication);
                 command.Parameters.AddWithValue("@price", Price);
-                command.Parameters.AddWithValue("@quantity", Quantity);
 
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
@@ -99,7 +96,7 @@ namespace library_management.ViewModel
         {
             if (String.IsNullOrEmpty(Title) || String.IsNullOrEmpty(Author) || String.IsNullOrEmpty(Publication))
                 return false;
-            else if (Price <= 0 || Quantity <= 0)
+            else if (Price <= 0)
                 return false;
             return true;
         }

@@ -25,7 +25,7 @@ namespace library_management.View
             InitializeComponent();
         }
 
-        public ChangeBookDetails(int id, string title, string author, string publication, decimal price, int quantity)
+        public ChangeBookDetails(int id, string title, string author, string publication, decimal price)
         {
             InitializeComponent();
             var result = (DataContext as ChangeBookDetailsViewModel);
@@ -34,7 +34,6 @@ namespace library_management.View
             result.Author = author;
             result.Publication = publication;
             result.Price = price;
-            result.Quantity = quantity;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

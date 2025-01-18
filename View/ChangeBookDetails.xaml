@@ -25,13 +25,12 @@
                Margin="0,0,0,10" 
                Grid.Row="0"/>
 
-        <Grid Grid.Row="1" Margin="0,10,0,10">
+        <Grid Grid.Row="1" Margin="0,10,0,10" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -53,10 +52,6 @@
             <!-- Book Price -->
             <Label Content="Price:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
             <TextBox x:Name="PriceTextBox" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Price, Mode=TwoWay}"/>
-
-            <!-- Book Quantity -->
-            <Label Content="Quantity:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
-            <TextBox x:Name="QuantityTextBox" Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Quantity, Mode=TwoWay}"/>
         </Grid>
 
         <!-- Buttons -->
