@@ -18,7 +18,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Upper page structure -->
@@ -36,7 +36,7 @@
 
         <!-- Bottom page structure -->
 
-        <Grid Grid.Row="1" Grid.Column="0" Width="325">
+        <Grid Grid.Row="1" Grid.Column="0" MaxWidth="325">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -83,8 +83,7 @@
         <Image Grid.Row="1" 
            Grid.Column="1"
            Source="../Resources/add_reader_img.jpg" 
-           HorizontalAlignment="Stretch" 
-           VerticalAlignment="Stretch"/>
+           Stretch="Fill"/>
 
     </Grid>
 </Window>
