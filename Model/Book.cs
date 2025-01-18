@@ -13,15 +13,13 @@ namespace library_management.Model
         public string Author { get; set; }
         public string Publication { get; set; }
         public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public Book(int id, string title, string author, string publication, decimal price, int quantity)
+        public Book(int id, string title, string author, string publication, decimal price)
         {
             ID = id;
             Title = title;
             Author = author;
             Publication = publication;
             Price = price;
-            Quantity = quantity;
         }
     }
 
