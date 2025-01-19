@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management.View"
         mc:Ignorable="d"
-        Title="ReturnBook" Height="450" Width="800" WindowStyle="ToolWindow">
+        Title="ReturnBook" Height="450" Width="800" WindowStyle="ToolWindow"
+        Background="LightGray" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,16 +34,17 @@
             </StackPanel>
 
             <Border Grid.Row="2" Background="#FF898989">
-                <DataGrid Name="DataGrid" Style="{StaticResource DataGridStyle}" MaxWidth="600" SelectionChanged="DataGrid_SelectionChanged">
-                    <DataGrid.Resources>
-                        <Style TargetType="DataGridRow">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand"></Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.Resources>
+                <DataGrid 
+                    Name="DataGrid" 
+                    Style="{StaticResource DataGridStyle}" 
+                    MaxWidth="600" 
+                    AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                        <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
+                        <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Border>
 

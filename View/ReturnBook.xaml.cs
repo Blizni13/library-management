@@ -37,14 +37,9 @@ namespace library_management.View
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!String.IsNullOrEmpty(SearchByReaderIdTextBox.Text))
-                LoadBooks($"SELECT * FROM IRBooks WHERE ReaderId = {SearchByReaderIdTextBox.Text}");
+                LoadBooks($"SELECT * FROM IRBooks WHERE ReaderId = {SearchByReaderIdTextBox.Text} AND ReturnDate IS NULL");
             else
                 LoadBooks();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show("Data grid selection changed.");
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
