@@ -1,0 +1,64 @@
+﻿<Window x:Class="library_management.View.BooksHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:library_management.View"
+        mc:Ignorable="d"
+        Title="BooksHistory" Height="450" Width="1200" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/ViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Issued Books" FontSize="18" Style="{StaticResource TitleLabelStyle}"/>
+        <Border Grid.Row="1" Grid.Column="0" Background="#FF898989">
+            <DataGrid 
+                Name="IssuedBooksDataGrid" 
+                Style="{StaticResource DataGridStyle}" 
+                Margin="10 0" 
+                MinWidth="300" 
+                MinHeight="300"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                    <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
+                    <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Label Grid.Row="0" Grid.Column="1" Content="Returned Books" FontSize="18" Style="{StaticResource TitleLabelStyle}"/>
+        <Border Grid.Row="1" Grid.Column="1" Background="#FF898989">
+            <DataGrid 
+                Name="ReturnedBooksDataGrid" 
+                Style="{StaticResource DataGridStyle}" 
+                Margin="10 0" 
+                MinWidth="300" 
+                MinHeight="300"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                    <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
+                    <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                    <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Window>
