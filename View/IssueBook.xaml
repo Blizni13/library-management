@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management.View" 
         mc:Ignorable="d"
-        Title="IssueBook" Height="450" Width="800" WindowStyle="ToolWindow"
-        >
+        Title="IssueBook" 
+        Height="450" 
+        Width="800" 
+        WindowStyle="ToolWindow"
+        Background="LightGray" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -85,7 +88,8 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center" Click="Button_Click"/>
+                VerticalAlignment="Center" Click="Button_Click"
+                Width="75"/>
         </Grid>
         
         <!-- Image panel -->

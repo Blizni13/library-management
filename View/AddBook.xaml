@@ -19,7 +19,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Upper page structure -->
@@ -72,8 +72,7 @@
         <Image Grid.Row="1" 
                Grid.Column="1"
                Source="../Resources/add_book_img.jpg" 
-               HorizontalAlignment="Stretch" 
-               VerticalAlignment="Stretch"/>
+               Stretch="Fill"/>
 
     </Grid>
 </Window>
