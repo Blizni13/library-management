@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management.View"
         mc:Ignorable="d"
-        Title="ViewReaders" Height="450" Width="800" WindowStyle="ToolWindow"
-        Loaded="Window_Loaded">
+        Title="ViewReaders" Height="450" Width="1000" WindowStyle="ToolWindow"
+        Background="LightGray" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,7 +32,22 @@
         </StackPanel>
 
         <Border Grid.Row="2" Background="#FF898989">
-            <DataGrid Name="DataGrid" Style="{StaticResource DataGridStyle}" MaxWidth="650" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid 
+                Name="DataGrid" 
+                Style="{StaticResource DataGridStyle}" 
+                MaxWidth="700" 
+                Margin="50 0" 
+                SelectionChanged="DataGrid_SelectionChanged"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                    <DataGridTextColumn Header="Membership Start Date" Binding="{Binding MembershipStartDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
