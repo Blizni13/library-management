@@ -137,8 +137,21 @@ namespace library_management.View
             {
                 MessageBoxService.ShowErrorBox("Please, provide return date field.");
                 return false;
+            } else if (IsReturnDateBeforeIssueDate(IdTextBox.Text, ReturnDatePicker.SelectedDate.Value))
+            {
+                MessageBoxService.ShowErrorBox("Provided return date is incorrect. Return date is earlier than issue date.");
+                return false;
             }
             return true;
+        }
+
+        private bool IsReturnDateBeforeIssueDate(string id, DateTime returnDate)
+        {
+            foreach (var book in _books)
+                if (book.ID.Equals(int.Parse(id)))
+                    return returnDate < book.IssueDate;
+
+            return false;
         }
     }
 }
