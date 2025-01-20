@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management.View" 
-        xmlns:viewModel="clr-namespace:library_management.ViewModel"
+        xmlns:viewModel="clr-namespace:library_management.ViewModel" xmlns:system="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
-        Title="ChangeReaderDetails" Height="375" Width="350">
+        Title="ChangeReaderDetails" Height="375" Width="350" WindowStyle="ToolWindow">
 
     <Window.DataContext>
         <viewModel:ChangeReaderDetailsViewModel/>
@@ -57,10 +57,16 @@
 
             <!-- Gender -->
             <Label Content="Gender:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
-            <ComboBox x:Name="GenderComboBox" Grid.Row="3" Grid.Column="1" Margin="5" SelectedItem="{Binding Gender, Mode=TwoWay}">
-                <ComboBoxItem Content="Male" />
-                <ComboBoxItem Content="Female" />
-                <ComboBoxItem Content="Other" />
+            <ComboBox x:Name="GenderComboBox" 
+                      Grid.Row="3" 
+                      Grid.Column="1" 
+                      Margin="5" 
+                      SelectedItem="{Binding Gender, Mode=TwoWay}">
+                <ComboBox.Items>
+                    <system:String>Male</system:String>
+                    <system:String>Female</system:String>
+                    <system:String>Other</system:String>
+                </ComboBox.Items>
             </ComboBox>
 
             <!-- Address -->
