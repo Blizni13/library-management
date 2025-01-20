@@ -28,8 +28,8 @@
 
             <Rectangle Grid.Row="1"/>
             <StackPanel Grid.Row="1" Style="{StaticResource SearchStackPanelStyle}">
-                <Label VerticalAlignment="Center">Search by reader id</Label>
-                <TextBox Name="SearchByReaderIdTextBox" VerticalAlignment="Center" Width="150" Margin="10 0" TextChanged="TextBox_TextChanged"/>
+                <Label VerticalAlignment="Center">Search by reader info</Label>
+                <TextBox Name="SearchByReaderInfoTextBox" VerticalAlignment="Center" Width="150" Margin="10 0" TextChanged="TextBox_TextChanged"/>
                 <Button VerticalAlignment="Center" Width="75" Click="RefreshButton_Click">Refresh</Button>
             </StackPanel>
 
@@ -41,7 +41,7 @@
                     AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
-                        <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                        <DataGridTextColumn Header="Reader Full Name" Binding="{Binding ReaderInfo}"/>
                         <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
                         <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
                     </DataGrid.Columns>

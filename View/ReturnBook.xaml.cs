@@ -36,8 +36,8 @@ namespace library_management.View
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(SearchByReaderIdTextBox.Text))
-                LoadBooks($"SELECT * FROM IRBooks WHERE ReaderId = {SearchByReaderIdTextBox.Text} AND ReturnDate IS NULL");
+            if (!String.IsNullOrEmpty(SearchByReaderInfoTextBox.Text))
+                LoadBooks(SearchByReaderInfoTextBox.Text);
             else
                 LoadBooks();
         }
@@ -91,8 +91,17 @@ namespace library_management.View
             }
         }
 
-        private void LoadBooks(string query = "SELECT * FROM IRBooks WHERE ReturnDate IS NULL")
+        private void LoadBooks(string? readerInfo = null)
         {
+            string query = @"SELECT id, firstName, lastName, bookInfo, issueDate 
+                            FROM IRBooks 
+                            INNER JOIN 
+                            Readers 
+                            ON IRBooks.ReaderId = Readers.ReaderId 
+                            WHERE IRBooks.ReturnDate IS NULL";
+            if (readerInfo != null)
+                query += " AND (LOWER(Readers.FirstName) LIKE LOWER(@FirstName) OR LOWER(Readers.LastName) LIKE LOWER(@LastName))";
+
             _books = new ObservableCollection<IssuedBook>();
 
             var connection = DBConnectionService.GetConnection();
@@ -100,16 +109,22 @@ namespace library_management.View
             try
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
+                if (readerInfo != null)
+                {
+                    command.Parameters.AddWithValue("@FirstName", "%" + readerInfo.ToLower() + "%");
+                    command.Parameters.AddWithValue("@LastName", "%" + readerInfo.ToLower() + "%");
+                }
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         var id = reader.GetInt32(0);
-                        var readerId = reader.GetInt32(1);
-                        var bookInfo = reader.GetString(2);
-                        var issueDate = reader.GetDateTime(3);
-                        _books.Add(new IssuedBook(id, readerId, bookInfo, issueDate));
+                        var firstName = reader.GetString(1);
+                        var lastName = reader.GetString(2);
+                        var bookInfo = reader.GetString(3);
+                        var issueDate = reader.GetDateTime(4);
+                        _books.Add(new IssuedBook(id, firstName + " " + lastName, bookInfo, issueDate));
                     }
                 }
 
