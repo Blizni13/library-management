@@ -76,6 +76,9 @@ namespace library_management.View
 
         private void LoadBooksFromDb()
         {
+            List<BookDTO> tempBooks = new List<BookDTO>();
+            Books = new ObservableCollection<BookDTO>();
+
             var connection = DBConnectionService.GetConnection();
 
             try
@@ -84,7 +87,6 @@ namespace library_management.View
 
                 MySqlCommand command = new MySqlCommand(query, connection);
 
-                Books = new ObservableCollection<BookDTO>();
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -92,7 +94,7 @@ namespace library_management.View
                     {
                         var title = reader.GetString(0);
                         var author = reader.GetString(1);
-                        Books.Add(new BookDTO(title, author));
+                        tempBooks.Add(new BookDTO(title, author));
                     }
                 }
             }
@@ -104,6 +106,12 @@ namespace library_management.View
             {
                 DBConnectionService.CloseConnection();
             }
+
+            // add only books that aren't already issued
+
+            foreach (var book in tempBooks)
+                if (!DBOperationService.CheckRowExistence("IRBooks", ("ReturnDate", null), ("BookInfo", book.Title + " by " + book.Author)))
+                    Books.Add(book);
 
         }
 
