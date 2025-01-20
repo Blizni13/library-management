@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:library_management.View"
         mc:Ignorable="d"
-        Title="ViewBooks" Height="450" Width="800"
+        Title="ViewBooks" Height="450" Width="1000"
         Loaded="Window_Loaded" 
         Icon="/Resources/small_book_img.jpg" 
         Background="LightGray" WindowStyle="ToolWindow">
@@ -34,7 +34,7 @@
         </StackPanel>
 
         <Border Grid.Row="2" Background="#FF898989">
-            <DataGrid Name="BooksDataGrid" Style="{StaticResource DataGridStyle}" MaxWidth="700" Margin="50 0" SelectionChanged="BooksDataGrid_SelectionChanged">
+            <DataGrid Name="BooksDataGrid" Style="{StaticResource DataGridStyle}" MaxWidth="750" Margin="50 0" SelectionChanged="BooksDataGrid_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
