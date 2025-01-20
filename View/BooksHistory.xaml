@@ -35,7 +35,7 @@
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                    <DataGridTextColumn Header="Reader Info" Binding="{Binding ReaderInfo}"/>
                     <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
                     <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
                 </DataGrid.Columns>
@@ -53,7 +53,7 @@
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Reader Id" Binding="{Binding ReaderId}"/>
+                    <DataGridTextColumn Header="Reader Info" Binding="{Binding ReaderInfo}"/>
                     <DataGridTextColumn Header="Book Info" Binding="{Binding BookInfo}"/>
                     <DataGridTextColumn Header="Issue Date" Binding="{Binding IssueDate, StringFormat=\{0:yyyy-MM-dd\}}"/>
                     <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate, StringFormat=\{0:yyyy-MM-dd\}}"/>

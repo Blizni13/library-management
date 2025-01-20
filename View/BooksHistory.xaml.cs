@@ -41,7 +41,7 @@ namespace library_management.View
 
             try
             {
-                string query = "SELECT * FROM IRBooks";
+                string query = "SELECT IRBooks.id, firstName, lastName, bookInfo, issueDate, returnDate FROM IRBooks INNER JOIN Readers ON IRBooks.ReaderId = Readers.ReaderId";
                 MySqlCommand command = new MySqlCommand(query, connection);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -49,14 +49,15 @@ namespace library_management.View
                     while (reader.Read())
                     {
                         var id = reader.GetInt32(0);
-                        var readerId = reader.GetInt32(1);
-                        var bookInfo = reader.GetString(2);
-                        var issueDate = reader.GetDateTime(3);
-                        var returnDate = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4);
+                        var readerName = reader.GetString(1);
+                        var readerSurname = reader.GetString(2);
+                        var bookInfo = reader.GetString(3);
+                        var issueDate = reader.GetDateTime(4);
+                        var returnDate = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5);
                         if (returnDate == null)
-                            _issuedBooks.Add(new IssuedBook(id, readerId, bookInfo, issueDate));
+                            _issuedBooks.Add(new IssuedBook(id, readerName + " " + readerSurname, bookInfo, issueDate));
                         else
-                            _returnedBooks.Add(new ReturnedBook(id, readerId, bookInfo, issueDate, returnDate.Value));
+                            _returnedBooks.Add(new ReturnedBook(id, readerName + " " + readerSurname, bookInfo, issueDate, returnDate.Value));
                     }
 
                     IssuedBooksDataGrid.ItemsSource = _issuedBooks;
