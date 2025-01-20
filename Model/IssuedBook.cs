@@ -9,13 +9,13 @@ namespace library_management.Model
     class IssuedBook
     {
         public int ID { get; set; }
-        public int ReaderId { get; set; }
+        public string ReaderInfo { get; set; }
         public string BookInfo { get; set; }
         public DateTime IssueDate { get; set; }
-        public IssuedBook(int id, int readerId, string bookInfo, DateTime issueDate)
+        public IssuedBook(int id, string readerInfo, string bookInfo, DateTime issueDate)
         {
             ID = id;
-            ReaderId = readerId;
+            ReaderInfo = readerInfo;
             BookInfo = bookInfo;
             IssueDate = issueDate;
         }
