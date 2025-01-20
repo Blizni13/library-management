@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.XPath;
 
 namespace library_management.ViewModel
 {
@@ -60,7 +61,7 @@ namespace library_management.ViewModel
             set
             {
                 _gender = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Gender));
             }
         }
 
@@ -99,6 +100,8 @@ namespace library_management.ViewModel
 
         public void Update()
         {
+            if (!ValidateFields())
+                return;
             var connection = DBConnectionService.GetConnection();
 
             try
@@ -139,6 +142,20 @@ namespace library_management.ViewModel
             {
                 DBConnectionService.CloseConnection();
             }
+        }
+
+        private bool ValidateFields()
+        {
+            bool result = false;
+            if (DateOfBirth > DateTime.Now)
+                MessageBoxService.ShowErrorBox("Date of birth cannot be in future.");
+            else if (MembershipStartDate > DateTime.Now)
+                MessageBoxService.ShowErrorBox("Membership start date cannot be in future.");
+            else
+                result = true;
+
+            return result;
+
         }
 
         public void Delete()
